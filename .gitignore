@@ -1,0 +1,14 @@
+# Vagrant
+.vagrant/
+*.box
+
+# Ansible
+*.retry
+ansible.log
+
+# Системные файлы
+.DS_Store
+Thumbs.db
+
+# Архивы (если не хочешь хранить в репо)
+# apache_webserver.tar.gz
