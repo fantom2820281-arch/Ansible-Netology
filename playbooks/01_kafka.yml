@@ -1,0 +1,23 @@
+---
+- name: Скачать и распаковать Kafka
+  hosts: lecture_nodes
+  become: yes
+  tasks:
+    - name: Создать папку /opt/kafka
+      file:
+        path: /opt/kafka
+        state: directory
+        mode: '0755'
+
+    - name: Скачать архив Kafka
+      get_url:
+        url: https://archive.apache.org/dist/kafka/3.6.0/kafka_2.13-3.6.0.tgz
+        dest: /tmp/kafka.tgz
+        mode: '0644'
+
+    - name: Распаковать архив в /opt/kafka
+      unarchive:
+        src: /tmp/kafka.tgz
+        dest: /opt/kafka
+        remote_src: yes
+        creates: /opt/kafka/kafka_2.13-3.6.0  # не распаковывать повторно

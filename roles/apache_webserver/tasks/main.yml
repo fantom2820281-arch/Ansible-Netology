@@ -1,0 +1,26 @@
+---
+- name: Установить пакет apache2
+  apt:
+    name: apache2
+    state: present
+    update_cache: yes
+
+- name: Открыть порт 80 в фаерволе UFW
+  ufw:
+    rule: allow
+    port: "80"
+    proto: tcp
+  notify: restart apache2
+
+- name: Сгенерировать страницу index.html из шаблона
+  template:
+    src: index.html.j2
+    dest: /var/www/html/index.html
+    mode: '0644'
+  notify: restart apache2
+
+- name: Убедиться, что служба apache2 запущена и в автозагрузке
+  service:
+    name: apache2
+    state: started
+    enabled: yes

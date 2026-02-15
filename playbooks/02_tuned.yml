@@ -1,0 +1,16 @@
+---
+- name: Установить и запустить tuned
+  hosts: lecture_nodes
+  become: yes
+  tasks:
+    - name: Установить пакет tuned
+      apt:
+        name: tuned
+        state: present
+        update_cache: yes
+
+    - name: Включить и запустить демон tuned
+      systemd:
+        name: tuned
+        state: started
+        enabled: yes

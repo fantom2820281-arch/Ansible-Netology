@@ -1,0 +1,6 @@
+---
+galaxy_info:
+  author: Dmitry
+  description: Роль для развёртывания веб-сервера Apache2 с информационной страницей
+  license: MIT
+  min_ansible_version: "2.10"

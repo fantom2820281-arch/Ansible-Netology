@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Информация о сервере {{ ansible_hostname }}</title>
+    <style>
+        body { font-family: Arial, sans-serif; max-width: 800px; margin: 40px auto; padding: 20px; background: #f5f5f5; }
+        .card { background: white; border-radius: 8px; padding: 25px; box-shadow: 0 2px 10px rgba(0,0,0,0.1); }
+        h1 { color: #333; border-bottom: 2px solid #007bff; padding-bottom: 10px; }
+        .info { margin: 15px 0; }
+        .label { font-weight: bold; color: #555; display: inline-block; width: 150px; }
+        .value { color: #007bff; }
+    </style>
+</head>
+<body>
+    <div class="card">
+        <h1>📊 Системная информация: {{ ansible_hostname }}</h1>
+        
+        <div class="info">
+            <span class="label">💻 CPU:</span>
+            <span class="value">{{ ansible_processor_vcpus }} ядер</span>
+        </div>
+        
+        <div class="info">
+            <span class="label">🧠 RAM:</span>
+            <span class="value">{{ (ansible_memtotal_mb / 1024) | round(1) }} ГБ</span>
+        </div>
+        
+        <div class="info">
+            <span class="label">💾 Диск /:</span>
+            <span class="value">{{ (ansible_devices.vda.size | default(ansible_devices.sda.size)) }}</span>
+        </div>
+        
+        <div class="info">
+            <span class="label">🌐 IP-адрес:</span>
+            <span class="value">{{ ansible_default_ipv4.address }}</span>
+        </div>
+        
+        <div class="info">
+            <span class="label">⏱️ Дата:</span>
+            <span class="value">{{ ansible_date_time.date }} {{ ansible_date_time.time }}</span>
+        </div>
+    </div>
+</body>
+</html>
